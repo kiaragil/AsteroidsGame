@@ -1,15 +1,46 @@
-//your variable declarations here
-public void setup() 
-{
-  //your code here
+public int bSize = 600;
+SpaceShip clarkKent = new SpaceShip();
+public void setup(){
+  size(bSize,bSize);
 }
-public void draw() 
-{
-  //your code here
+public void draw(){  
+background(0);
+clarkKent.show();//your code here
 }
-class SpaceShip extends Floater  
-{   
-    //your code here
+class SpaceShip extends Floater{   
+    public SpaceShip(){
+      corners = 4;
+      xCorners = new int[corners];
+      yCorners = new int[corners];
+      xCorners[0] = -8;
+      yCorners[0] = -8;
+      xCorners[1] = 16;
+      yCorners[1] = 0;
+      xCorners[2] = -8;
+      yCorners[2] = 8;
+      xCorners[3] = -2;
+      yCorners[3] = 0;
+
+      myColor = color(161,239,139);   
+      myCenterX = ((int)(bSize/2));
+      myCenterY = ((int)(bSize/2));
+      setDirectionX(0);
+      setDirectionY(0);
+      setPointDirection(0); //holds current direction the ship is pointing in degrees    
+
+    }
+
+  public void setX(int x){myCenterX = x;}
+  public int getX(){return ((int)(myCenterX));}
+  public void setY(int y){myCenterY = y;}   
+  public int getY(){return ((int)(myCenterY));}  
+  public void setDirectionX(double x){myDirectionX = x;} 
+  public double getDirectionX(){return((int)(myDirectionX));}   
+  public void setDirectionY(double y){myDirectionY = y;}  
+  public double getDirectionY(){return((int)(myDirectionY));} 
+  public void setPointDirection(int degrees){myPointDirection = degrees;} 
+  public double getPointDirection(){return((int)(myPointDirection));}
+
 }
 abstract class Floater //Do NOT modify the Floater class! Make changes in the SpaceShip class 
 {   
