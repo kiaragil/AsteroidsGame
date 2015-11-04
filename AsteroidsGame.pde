@@ -12,13 +12,13 @@ class SpaceShip extends Floater{
       corners = 4;
       xCorners = new int[corners];
       yCorners = new int[corners];
-      xCorners[0] = -8;
-      yCorners[0] = -8;
+      xCorners[0] = -10;
+      yCorners[0] = 14;
       xCorners[1] = 16;
       yCorners[1] = 0;
-      xCorners[2] = -8;
-      yCorners[2] = 8;
-      xCorners[3] = -2;
+      xCorners[2] = -10;
+      yCorners[2] = -14;
+      xCorners[3] = -6;
       yCorners[3] = 0;
 
       myColor = color(161,239,139);   
