@@ -1,12 +1,74 @@
 public int bSize = 600;
 SpaceShip clarkKent = new SpaceShip();
+boolean left = false;
+boolean right = false;
+boolean up = false;
+boolean down = false;
+boolean hyperSpace = false;
+boolean fire = false;
 public void setup(){
   size(bSize,bSize);
 }
 public void draw(){  
-background(0);
-clarkKent.show();//your code here
+  background(0);
+  clarkKent.show();
+    clarkKent.move();
+
+  if (left == true){
+    clarkKent.setPointDirection((int)(clarkKent.getPointDirection()-5));
+  }
+  if (right == true){
+    clarkKent.setPointDirection((int)(clarkKent.getPointDirection()+5));
+  }
+  if (up == true){
+    clarkKent.accelerate(.05);
+  }
+  if (down  == true){
+    clarkKent.accelerate(-.05);
+  }
+
 }
+
+void keyPressed()
+{
+  if(key == CODED && keyCode == UP){ 
+    up = true;
+  }
+  else if(key == CODED && keyCode == DOWN){ 
+    down = true;
+  }
+  else if(key == CODED && keyCode == LEFT){ 
+    left = true;
+  }
+  else if(key == CODED && keyCode == RIGHT){ 
+    right = true;
+  }
+  if(key == 'h'){ 
+    clarkKent.setX((int)(Math.random()*600));
+    clarkKent.setY((int)(Math.random()*600));
+  }
+}
+void keyReleased()
+{
+  if(key == CODED && keyCode == UP){ 
+    up = false;
+  }
+  else if(key == CODED && keyCode == DOWN){ 
+    down = false;
+  }
+  else if(key == CODED && keyCode == LEFT){ 
+    left = false;
+  }
+  else if(key == CODED && keyCode == RIGHT){ 
+    right = false;
+  }
+
+}
+public void keyTyped(){
+
+}
+
+
 class SpaceShip extends Floater{   
     public SpaceShip(){
       corners = 4;
