@@ -1,5 +1,6 @@
 public int bSize = 600;
 SpaceShip clarkKent = new SpaceShip();
+star[] kryptonite = new star[100];
 boolean left = false;
 boolean right = false;
 boolean up = false;
@@ -8,11 +9,18 @@ boolean hyperSpace = false;
 boolean fire = false;
 public void setup(){
   size(bSize,bSize);
+  for(int i = 0; i < kryptonite.length; i++){
+    kryptonite[i] = new star();
+  }
 }
 public void draw(){  
   background(0);
   clarkKent.show();
-    clarkKent.move();
+  clarkKent.move();
+  for(int i = 0; i < kryptonite.length; i++)
+    {
+      kryptonite[i].show();
+    }
 
   if (left == true){
     clarkKent.setPointDirection((int)(clarkKent.getPointDirection()-5));
@@ -131,6 +139,25 @@ class SpaceShip extends Floater{
     }   
   }   
 
+}
+
+class star
+{
+  private int myX,myY,size;
+  star()
+  {
+    myX = (int)(Math.random()*width);
+    myY = (int)(Math.random()*height);
+  }
+  void show()
+  {
+    stroke(255);
+    ellipse(myX,myY,4,4);
+    if(myX > width){myX = 0;}
+    else if(myX < 0){myX = width;}
+    if(myY > height){myY = 0;}
+    else if(myY < 0){myY = height;}
+  }
 }
 abstract class Floater //Do NOT modify the Floater class! Make changes in the SpaceShip class 
 {   
