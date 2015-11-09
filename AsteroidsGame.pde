@@ -103,6 +103,34 @@ class SpaceShip extends Floater{
   public void setPointDirection(int degrees){myPointDirection = degrees;} 
   public double getPointDirection(){return((int)(myPointDirection));}
 
+  public void move ()   //move the floater in the current direction of travel
+  {      
+    //change the x and y coordinates by myDirectionX and myDirectionY       
+    myCenterX += myDirectionX;    
+    myCenterY += myDirectionY;     
+
+    myDirectionX = myDirectionX/1.0054;
+    myDirectionY = myDirectionY/1.0054;
+
+        //wrap around screen    
+    if(myCenterX >width)
+    {     
+      myCenterX = 0;    
+    }    
+    else if (myCenterX<0)
+    {     
+      myCenterX = width;    
+    }    
+    if(myCenterY >height)
+    {    
+      myCenterY = 0;    
+    }   
+    else if (myCenterY < 0)
+    {     
+      myCenterY = height;    
+    }   
+  }   
+
 }
 abstract class Floater //Do NOT modify the Floater class! Make changes in the SpaceShip class 
 {   
