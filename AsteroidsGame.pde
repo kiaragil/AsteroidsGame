@@ -13,7 +13,7 @@ public void setup(){
     kryptonite[i] = new star();
   }
 }
-public void draw(){  
+public void draw(){
   background(0);
   clarkKent.show();
   clarkKent.move();
@@ -34,11 +34,8 @@ public void draw(){
   if (down  == true){
     clarkKent.accelerate(-.05);
   }
-
 }
-
-void keyPressed()
-{
+void keyPressed(){
   if(key == CODED && keyCode == UP){ 
     up = true;
   }
@@ -56,9 +53,7 @@ void keyPressed()
     clarkKent.setY((int)(Math.random()*600));
   }
 }
-void keyReleased()
-{
-  if(key == CODED && keyCode == UP){ 
+void keyReleased(){  if(key == CODED && keyCode == UP){ 
     up = false;
   }
   else if(key == CODED && keyCode == DOWN){ 
@@ -70,14 +65,8 @@ void keyReleased()
   else if(key == CODED && keyCode == RIGHT){ 
     right = false;
   }
-
 }
-public void keyTyped(){
-
-}
-
-
-class SpaceShip extends Floater{   
+class SpaceShip extends Floater{
     public SpaceShip(){
       corners = 4;
       xCorners = new int[corners];
@@ -97,7 +86,6 @@ class SpaceShip extends Floater{
       setDirectionX(0);
       setDirectionY(0);
       setPointDirection(0); //holds current direction the ship is pointing in degrees    
-
     }
 
   public void setX(int x){myCenterX = x;}
@@ -111,8 +99,7 @@ class SpaceShip extends Floater{
   public void setPointDirection(int degrees){myPointDirection = degrees;} 
   public double getPointDirection(){return((int)(myPointDirection));}
 
-  public void move ()   //move the floater in the current direction of travel
-  {      
+  public void move (){
     //change the x and y coordinates by myDirectionX and myDirectionY       
     myCenterX += myDirectionX;    
     myCenterY += myDirectionY;     
@@ -138,29 +125,24 @@ class SpaceShip extends Floater{
       myCenterY = height;    
     }   
   }   
-
 }
 
-class star
-{
+class star{
   private int myX,myY,size;
-  star()
-  {
+  star(){
     myX = (int)(Math.random()*width);
     myY = (int)(Math.random()*height);
   }
-  void show()
-  {
+  void show(){
     stroke(255);
-    ellipse(myX,myY,4,4);
+    ellipse(myX,myY,2,2);
     if(myX > width){myX = 0;}
     else if(myX < 0){myX = width;}
     if(myY > height){myY = 0;}
     else if(myY < 0){myY = height;}
   }
 }
-abstract class Floater //Do NOT modify the Floater class! Make changes in the SpaceShip class 
-{   
+abstract class Floater{
   protected int corners;  //the number of corners, a triangular floater has 3   
   protected int[] xCorners;   
   protected int[] yCorners;   
