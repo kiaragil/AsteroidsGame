@@ -1,6 +1,6 @@
 public int bSize = 600;
 SpaceShip clarkKent = new SpaceShip();
-star[] kryptonite = new star[100];
+star[] kryptonite = new star[150];
 boolean left = false;
 boolean right = false;
 boolean up = false;
@@ -49,6 +49,8 @@ void keyPressed(){
     right = true;
   }
   if(key == 'h'){ 
+    clarkKent.setDirectionX(0);
+    clarkKent.setDirectionY(0);
     clarkKent.setX((int)(Math.random()*600));
     clarkKent.setY((int)(Math.random()*600));
   }
