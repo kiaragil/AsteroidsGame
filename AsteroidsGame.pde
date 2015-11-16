@@ -49,9 +49,13 @@ void keyPressed(){
     right = true;
   }
   if(key == 'h'){ 
+    //full stop 
     clarkKent.setDirectionX(0);
     clarkKent.setDirectionY(0);
-    clarkKent.setX((int)(Math.random()*600));
+    //random direction
+    clarkKent.setPointDirection((int)(Math.random()*360+1));
+    //random location
+    clarkKent.setX((int)(Math.random()*600)); 
     clarkKent.setY((int)(Math.random()*600));
   }
 }
@@ -106,8 +110,8 @@ class SpaceShip extends Floater{
     myCenterX += myDirectionX;    
     myCenterY += myDirectionY;     
 
-    myDirectionX = myDirectionX/1.0054;
-    myDirectionY = myDirectionY/1.0054;
+    myDirectionX = myDirectionX/1.015;
+    myDirectionY = myDirectionY/1.015;
 
         //wrap around screen    
     if(myCenterX >width)
