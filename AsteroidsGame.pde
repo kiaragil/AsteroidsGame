@@ -1,6 +1,6 @@
 public int bSize = 600;
 SpaceShip clarkKent = new SpaceShip();
-star[] kryptonite = new star[150];
+Stars [] kryptonite = new Stars[150];
 boolean left = false;
 boolean right = false;
 boolean up = false;
@@ -10,17 +10,17 @@ boolean fire = false;
 public void setup(){
   size(bSize,bSize);
   for(int i = 0; i < kryptonite.length; i++){
-    kryptonite[i] = new star();
+    kryptonite[i] = new Stars();
   }
 }
 public void draw(){
-  background(0);
-  clarkKent.show();
-  clarkKent.move();
-  for(int i = 0; i < kryptonite.length; i++)
-    {
+  background(0);  
+  for(int i = 0; i < kryptonite.length; i++){
       kryptonite[i].show();
     }
+  clarkKent.show();
+  clarkKent.move();
+
 
   if (left == true){
     clarkKent.setPointDirection((int)(clarkKent.getPointDirection()-5));
@@ -133,9 +133,9 @@ class SpaceShip extends Floater{
   }   
 }
 
-class star{
+class Stars {
   private int myX,myY,size;
-  star(){
+  Stars(){
     myX = (int)(Math.random()*width);
     myY = (int)(Math.random()*height);
   }
@@ -147,7 +147,75 @@ class star{
     if(myY > height){myY = 0;}
     else if(myY < 0){myY = height;}
   }
+
 }
+
+class Asteroids extends Floater {
+  Asteroids(){
+      myColor = color(200,100,50);
+      corners = 6;
+      xCorners = new int[corners];
+      yCorners = new int[corners];
+      xCorners[0] = 0;
+      yCorners[0] = 4;
+      xCorners[1] = -3;
+      yCorners[1] = 2;
+      xCorners[2] = -3;
+      yCorners[2] = -2;
+      xCorners[3] = 0;
+      yCorners[3] = -4;
+      xCorners[4] = 3;
+      yCorners[4] = -2;
+      xCorners[5] = 3;
+      yCorners[5] = 2;
+   
+      myCenterX = ((int)(bSize/2));
+      myCenterY = ((int)(bSize/2));
+      setDirectionX(0);
+      setDirectionY(0);
+      setPointDirection(0); //holds current direction the ship is pointing in degrees    
+    }
+
+  public void setX(int x){myCenterX = x;}
+  public int getX(){return ((int)(myCenterX));}
+  public void setY(int y){myCenterY = y;}   
+  public int getY(){return ((int)(myCenterY));}  
+  public void setDirectionX(double x){myDirectionX = x;} 
+  public double getDirectionX(){return((int)(myDirectionX));}   
+  public void setDirectionY(double y){myDirectionY = y;}  
+  public double getDirectionY(){return((int)(myDirectionY));} 
+  public void setPointDirection(int degrees){myPointDirection = degrees;} 
+  public double getPointDirection(){return((int)(myPointDirection));}
+
+  public void move (){
+    //change the x and y coordinates by myDirectionX and myDirectionY       
+    myCenterX += myDirectionX;    
+    myCenterY += myDirectionY;     
+
+    myDirectionX = myDirectionX;
+    myDirectionY = myDirectionY;
+
+        //wrap around screen    
+    if(myCenterX >width)
+    {     
+      myCenterX = 0;    
+    }    
+    else if (myCenterX<0)
+    {     
+      myCenterX = width;    
+    }    
+    if(myCenterY >height)
+    {    
+      myCenterY = 0;    
+    }   
+    else if (myCenterY < 0)
+    {     
+      myCenterY = height;    
+    }   
+  } 
+
+}
+
 abstract class Floater{
   protected int corners;  //the number of corners, a triangular floater has 3   
   protected int[] xCorners;   
