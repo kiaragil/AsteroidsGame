@@ -1,5 +1,6 @@
 public int bSize = 600;
 SpaceShip clarkKent = new SpaceShip();
+Asteroids lexLuthor = new Asteroids();
 Stars [] kryptonite = new Stars[150];
 boolean left = false;
 boolean right = false;
@@ -20,6 +21,8 @@ public void draw(){
     }
   clarkKent.show();
   clarkKent.move();
+  lexLuthor.show();
+  lexLuthor.move();
 
 
   if (left == true){
@@ -59,7 +62,8 @@ void keyPressed(){
     clarkKent.setY((int)(Math.random()*600));
   }
 }
-void keyReleased(){  if(key == CODED && keyCode == UP){ 
+void keyReleased(){  
+  if(key == CODED && keyCode == UP){ 
     up = false;
   }
   else if(key == CODED && keyCode == DOWN){ 
@@ -93,7 +97,6 @@ class SpaceShip extends Floater{
       setDirectionY(0);
       setPointDirection(0); //holds current direction the ship is pointing in degrees    
     }
-
   public void setX(int x){myCenterX = x;}
   public int getX(){return ((int)(myCenterX));}
   public void setY(int y){myCenterY = y;}   
@@ -147,33 +150,38 @@ class Stars {
     if(myY > height){myY = 0;}
     else if(myY < 0){myY = height;}
   }
-
 }
 
 class Asteroids extends Floater {
+  private int rotationSpeed;
   Asteroids(){
       myColor = color(200,100,50);
-      corners = 6;
+      corners = 8;
       xCorners = new int[corners];
       yCorners = new int[corners];
-      xCorners[0] = 0;
-      yCorners[0] = 4;
-      xCorners[1] = -3;
-      yCorners[1] = 2;
-      xCorners[2] = -3;
-      yCorners[2] = -2;
-      xCorners[3] = 0;
-      yCorners[3] = -4;
-      xCorners[4] = 3;
-      yCorners[4] = -2;
-      xCorners[5] = 3;
-      yCorners[5] = 2;
+      xCorners[0] = 30;
+      yCorners[0] = 0;
+      xCorners[1] = 25;
+      yCorners[1] = 25;
+      xCorners[2] = 0;
+      yCorners[2] = 30;
+      xCorners[3] = -25;
+      yCorners[3] = 25;
+      xCorners[4] = -30;
+      yCorners[4] = 0;
+      xCorners[5] = -25;
+      yCorners[5] = -25;
+      xCorners[6] = 0;
+      yCorners[6] = -30;
+      xCorners[7] = 25;
+      yCorners[7] = -25;
    
-      myCenterX = ((int)(bSize/2));
-      myCenterY = ((int)(bSize/2));
-      setDirectionX(0);
-      setDirectionY(0);
-      setPointDirection(0); //holds current direction the ship is pointing in degrees    
+      myCenterX = ((int)(Math.random()*599));
+      myCenterY = ((int)(Math.random()*599));
+      setDirectionX((Math.random()*3-1.5));
+      setDirectionY((Math.random()*3-1.5));
+      setPointDirection(0); //holds current direction the ship is pointing in degrees
+      rotationSpeed = (int)(Math.random()*10-4);    
     }
 
   public void setX(int x){myCenterX = x;}
@@ -191,9 +199,7 @@ class Asteroids extends Floater {
     //change the x and y coordinates by myDirectionX and myDirectionY       
     myCenterX += myDirectionX;    
     myCenterY += myDirectionY;     
-
-    myDirectionX = myDirectionX;
-    myDirectionY = myDirectionY;
+    myPointDirection+=rotationSpeed;
 
         //wrap around screen    
     if(myCenterX >width)
@@ -213,7 +219,6 @@ class Asteroids extends Floater {
       myCenterY = height;    
     }   
   } 
-
 }
 
 abstract class Floater{
