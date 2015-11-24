@@ -1,28 +1,38 @@
 public int bSize = 600;
-SpaceShip clarkKent = new SpaceShip();
-Asteroids lexLuthor = new Asteroids();
-Stars [] kryptonite = new Stars[150];
+
 boolean left = false;
 boolean right = false;
 boolean up = false;
 boolean down = false;
 boolean hyperSpace = false;
 boolean fire = false;
+
+SpaceShip clarkKent = new SpaceShip();
+Stars [] krypton = new Stars[150];
+Asteroids [] lexLuthor = new Asteroids[30];
+
 public void setup(){
   size(bSize,bSize);
-  for(int i = 0; i < kryptonite.length; i++){
-    kryptonite[i] = new Stars();
+  for(int i = 0; i < krypton.length; i++){
+    krypton[i] = new Stars();
+  }
+    for(int i = 0; i < lexLuthor.length; i++)
+  {
+    lexLuthor[i] = new Asteroids();
   }
 }
 public void draw(){
   background(0);  
-  for(int i = 0; i < kryptonite.length; i++){
-      kryptonite[i].show();
+  for(int i = 0; i < krypton.length; i++){
+      krypton[i].show();
     }
+     for(int i = 0; i < lexLuthor.length; i++){
+      lexLuthor[i].show();
+      lexLuthor[i].move();
+  }
+
   clarkKent.show();
   clarkKent.move();
-  lexLuthor.show();
-  lexLuthor.move();
 
 
   if (left == true){
@@ -32,10 +42,10 @@ public void draw(){
     clarkKent.setPointDirection((int)(clarkKent.getPointDirection()+5));
   }
   if (up == true){
-    clarkKent.accelerate(.05);
+    clarkKent.accelerate(.1);
   }
   if (down  == true){
-    clarkKent.accelerate(-.05);
+    clarkKent.accelerate(-.1);
   }
 }
 void keyPressed(){
@@ -97,6 +107,7 @@ class SpaceShip extends Floater{
       setDirectionY(0);
       setPointDirection(0); //holds current direction the ship is pointing in degrees    
     }
+
   public void setX(int x){myCenterX = x;}
   public int getX(){return ((int)(myCenterX));}
   public void setY(int y){myCenterY = y;}   
@@ -159,22 +170,22 @@ class Asteroids extends Floater {
       corners = 8;
       xCorners = new int[corners];
       yCorners = new int[corners];
-      xCorners[0] = 30;
+      xCorners[0] = 20;
       yCorners[0] = 0;
-      xCorners[1] = 25;
-      yCorners[1] = 25;
+      xCorners[1] = 15;
+      yCorners[1] = 15;
       xCorners[2] = 0;
-      yCorners[2] = 30;
-      xCorners[3] = -25;
-      yCorners[3] = 25;
-      xCorners[4] = -30;
+      yCorners[2] = 20;
+      xCorners[3] = -15;
+      yCorners[3] = 15;
+      xCorners[4] = -20;
       yCorners[4] = 0;
-      xCorners[5] = -25;
-      yCorners[5] = -25;
+      xCorners[5] = -15;
+      yCorners[5] = -15;
       xCorners[6] = 0;
-      yCorners[6] = -30;
-      xCorners[7] = 25;
-      yCorners[7] = -25;
+      yCorners[6] = -20;
+      xCorners[7] = 15;
+      yCorners[7] = -15;
    
       myCenterX = ((int)(Math.random()*599));
       myCenterY = ((int)(Math.random()*599));
@@ -202,19 +213,19 @@ class Asteroids extends Floater {
     myPointDirection+=rotationSpeed;
 
         //wrap around screen    
-    if(myCenterX >width)
+    if(myCenterX >width+50)
     {     
       myCenterX = 0;    
     }    
-    else if (myCenterX<0)
+    else if (myCenterX<0-50)
     {     
       myCenterX = width;    
     }    
-    if(myCenterY >height)
+    if(myCenterY >height+50)
     {    
       myCenterY = 0;    
     }   
-    else if (myCenterY < 0)
+    else if (myCenterY < 0-50)
     {     
       myCenterY = height;    
     }   
