@@ -9,26 +9,27 @@ boolean fire = false;
 
 SpaceShip clarkKent = new SpaceShip();
 Stars [] krypton = new Stars[150];
-Asteroids [] lexLuthor = new Asteroids[30];
+ArrayList <Asteroids> lexLuthor;
+
 
 public void setup(){
   size(bSize,bSize);
   for(int i = 0; i < krypton.length; i++){
     krypton[i] = new Stars();
   }
-    for(int i = 0; i < lexLuthor.length; i++)
-  {
-    lexLuthor[i] = new Asteroids();
+  lexLuthor = new ArrayList <Asteroids>();
+  for(int j = 0; j < 30; j++){
+    lexLuthor.add(new Asteroids());
   }
 }
 public void draw(){
   background(0);  
   for(int i = 0; i < krypton.length; i++){
-      krypton[i].show();
+    krypton[i].show();
     }
-     for(int i = 0; i < lexLuthor.length; i++){
-      lexLuthor[i].show();
-      lexLuthor[i].move();
+  for(int j = 0; j < lexLuthor.size(); j++){
+    lexLuthor.get(j).show();
+    lexLuthor.get(j).move();
   }
 
   clarkKent.show();
@@ -170,22 +171,22 @@ class Asteroids extends Floater {
       corners = 8;
       xCorners = new int[corners];
       yCorners = new int[corners];
-      xCorners[0] = 20;
+      xCorners[0] = 15;
       yCorners[0] = 0;
-      xCorners[1] = 15;
-      yCorners[1] = 15;
+      xCorners[1] = 10;
+      yCorners[1] = 10;
       xCorners[2] = 0;
-      yCorners[2] = 20;
-      xCorners[3] = -15;
-      yCorners[3] = 15;
-      xCorners[4] = -20;
+      yCorners[2] = 15;
+      xCorners[3] = -10;
+      yCorners[3] = 10;
+      xCorners[4] = -15;
       yCorners[4] = 0;
-      xCorners[5] = -15;
-      yCorners[5] = -15;
+      xCorners[5] = -10;
+      yCorners[5] = -10;
       xCorners[6] = 0;
-      yCorners[6] = -20;
-      xCorners[7] = 15;
-      yCorners[7] = -15;
+      yCorners[6] = -15;
+      xCorners[7] = 10;
+      yCorners[7] = -10;
    
       myCenterX = ((int)(Math.random()*599));
       myCenterY = ((int)(Math.random()*599));
