@@ -30,6 +30,9 @@ public void draw(){
   for(int j = 0; j < lexLuthor.size(); j++){
     lexLuthor.get(j).show();
     lexLuthor.get(j).move();
+    if (dist(lexLuthor.get(j).getX(),lexLuthor.get(j).getY(), clarkKent.getX(), clarkKent.getY()) < 20){
+      lexLuthor.remove(j);
+    }
   }
 
   clarkKent.show();
@@ -48,6 +51,7 @@ public void draw(){
   if (down  == true){
     clarkKent.accelerate(-.1);
   }
+
 }
 void keyPressed(){
   if(key == CODED && keyCode == UP){ 
@@ -101,7 +105,7 @@ class SpaceShip extends Floater{
       xCorners[3] = -6;
       yCorners[3] = 0;
 
-      myColor = color(161,239,139);   
+      myColor = color(124,174,138);   
       myCenterX = ((int)(bSize/2));
       myCenterY = ((int)(bSize/2));
       setDirectionX(0);
@@ -167,26 +171,27 @@ class Stars {
 class Asteroids extends Floater {
   private int rotationSpeed;
   Asteroids(){
-      myColor = color(200,100,50);
+
+      myColor = color(200,7,32,70);
       corners = 8;
       xCorners = new int[corners];
       yCorners = new int[corners];
-      xCorners[0] = 15;
+      xCorners[0] = 20;
       yCorners[0] = 0;
-      xCorners[1] = 10;
-      yCorners[1] = 10;
+      xCorners[1] = 15;
+      yCorners[1] = 15;
       xCorners[2] = 0;
-      yCorners[2] = 15;
-      xCorners[3] = -10;
-      yCorners[3] = 10;
-      xCorners[4] = -15;
+      yCorners[2] = 20;
+      xCorners[3] = -15;
+      yCorners[3] = 15;
+      xCorners[4] = -20;
       yCorners[4] = 0;
-      xCorners[5] = -10;
-      yCorners[5] = -10;
+      xCorners[5] = -15;
+      yCorners[5] = -15;
       xCorners[6] = 0;
-      yCorners[6] = -15;
-      xCorners[7] = 10;
-      yCorners[7] = -10;
+      yCorners[6] = -20;
+      xCorners[7] = 15;
+      yCorners[7] = -15;
    
       myCenterX = ((int)(Math.random()*599));
       myCenterY = ((int)(Math.random()*599));
