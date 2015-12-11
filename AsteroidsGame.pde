@@ -92,26 +92,26 @@ void keyReleased(){
   }
 }
 class SpaceShip extends Floater{
-    public SpaceShip(){
-      corners = 4;
-      xCorners = new int[corners];
-      yCorners = new int[corners];
-      xCorners[0] = -10;
-      yCorners[0] = 14;
-      xCorners[1] = 16;
-      yCorners[1] = 0;
-      xCorners[2] = -10;
-      yCorners[2] = -14;
-      xCorners[3] = -6;
-      yCorners[3] = 0;
+  public SpaceShip(){
+    corners = 4;
+    xCorners = new int[corners];
+    yCorners = new int[corners];
+    xCorners[0] = -10;
+    yCorners[0] = 14;
+    xCorners[1] = 16;
+    yCorners[1] = 0;
+    xCorners[2] = -10;
+    yCorners[2] = -14;
+    xCorners[3] = -6;
+    yCorners[3] = 0;
 
-      myColor = color(124,174,138);   
-      myCenterX = ((int)(bSize/2));
-      myCenterY = ((int)(bSize/2));
-      setDirectionX(0);
-      setDirectionY(0);
-      setPointDirection(0); //holds current direction the ship is pointing in degrees    
-    }
+    myColor = color(124,174,138);   
+    setX((int)(bSize/2));
+    setY((int)(bSize/2));
+    setDirectionX(0);
+    setDirectionY(0);
+    setPointDirection(0); //holds current direction the ship is pointing in degrees    
+  }
 
   public void setX(int x){myCenterX = x;}
   public int getX(){return ((int)(myCenterX));}
@@ -124,7 +124,7 @@ class SpaceShip extends Floater{
   public void setPointDirection(int degrees){myPointDirection = degrees;} 
   public double getPointDirection(){return((int)(myPointDirection));}
 
-  public void move (){
+  public void move(){
     //change the x and y coordinates by myDirectionX and myDirectionY       
     myCenterX += myDirectionX;    
     myCenterY += myDirectionY;     
@@ -132,7 +132,7 @@ class SpaceShip extends Floater{
     myDirectionX = myDirectionX/1.015;
     myDirectionY = myDirectionY/1.015;
 
-        //wrap around screen    
+    //wrap around screen    
     if(myCenterX >width)
     {     
       myCenterX = 0;    
@@ -149,7 +149,7 @@ class SpaceShip extends Floater{
     {     
       myCenterY = height;    
     }   
-  }   
+  }
 }
 
 class Stars {
@@ -238,6 +238,36 @@ class Asteroids extends Floater {
   } 
 }
 
+class Bullets extends Floater {
+  public Bullets(SpaceShip clarkKent){
+    setX(clarkKent.getX());
+    setY(clarkKent.getY());
+    setPointDirection((int)(clarkKent.getPointDirection()));
+    double dRadians = myPointDirection*(Math.PI/180);
+    setDirectionX(5 * Math.cos(dRadians) + clarkKent.getDirectionX()); 
+    setDirectionY(5 * Math.cos(dRadians) + clarkKent.getDirectionY());   
+    accelerate(10);
+  }
+  public void setX(int x){myCenterX = x;}
+  public int getX(){return ((int)(myCenterX));}
+  public void setY(int y){myCenterY = y;}   
+  public int getY(){return ((int)(myCenterY));}  
+  public void setDirectionX(double x){myDirectionX = x;} 
+  public double getDirectionX(){return((int)(myDirectionX));}   
+  public void setDirectionY(double y){myDirectionY = y;}  
+  public double getDirectionY(){return((int)(myDirectionY));} 
+  public void setPointDirection(int degrees){myPointDirection = degrees;} 
+  public double getPointDirection(){return((int)(myPointDirection));}
+
+  public void move (){
+    myCenterX += myDirectionX;    
+    myCenterY += myDirectionY;
+    accelerate(0.5);
+  }
+  public void show (){
+    ellipse(x, y, width, height);
+  }
+}
 abstract class Floater{
   protected int corners;  //the number of corners, a triangular floater has 3   
   protected int[] xCorners;   
