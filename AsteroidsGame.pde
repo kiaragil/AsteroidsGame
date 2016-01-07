@@ -7,66 +7,78 @@ boolean down = false;
 boolean hyperSpace = false;
 boolean fire = false;
 
-SpaceShip clarkKent = new SpaceShip();
-Stars [] krypton = new Stars[150];
+SpaceShip clarkKent;
+Stars [] krypton;
 ArrayList <Asteroids> lexLuthor;
-
+ArrayList <Bullets> heatVision;
 
 public void setup(){
-  size(bSize,bSize);
+  size(600,600);
+  krypton = new Stars[150];
+  lexLuthor = new ArrayList <Asteroids>();
+  heatVision = new ArrayList <Bullets>();
+  clarkKent = new SpaceShip();
+  
   for(int i = 0; i < krypton.length; i++){
     krypton[i] = new Stars();
   }
+
   lexLuthor = new ArrayList <Asteroids>();
   for(int j = 0; j < 30; j++){
     lexLuthor.add(new Asteroids());
   }
 }
+
 public void draw(){
   background(0);  
-  for(int i = 0; i < krypton.length; i++){
-    krypton[i].show();
-    }
+  for(int i = 0; i < krypton.length; i++){ krypton[i].show();}
+
   for(int j = 0; j < lexLuthor.size(); j++){
     lexLuthor.get(j).show();
     lexLuthor.get(j).move();
+   
     if (dist(lexLuthor.get(j).getX(),lexLuthor.get(j).getY(), clarkKent.getX(), clarkKent.getY()) < 20){
-      lexLuthor.remove(j);
+      clarkKent.setX((int)(bSize/2));
+      clarkKent.setY((int)(bSize/2));
     }
+  }
+
+ for(int p = 0; p < heatVision.size(); p++)
+    {
+      for(int c = 0;c < lexLuthor.size() ;c++)
+      {
+        if(dist(heatVision.get(p).getX(),heatVision.get(p).getY(),lexLuthor.get(c).getX(),lexLuthor.get(c).getY()) <= 30)
+        {
+          heatVision.remove(p);
+          lexLuthor.remove(c);
+          break;
+        }
+        if (lexLuthor.size()<10){lexLuthor.add(new Asteroids()); }
+      }
+    }
+
+  for(int h=0; h < heatVision.size(); h++){
+    heatVision.get(h).move();
+    heatVision.get(h).show();
   }
 
   clarkKent.show();
   clarkKent.move();
 
 
-  if (left == true){
-    clarkKent.setPointDirection((int)(clarkKent.getPointDirection()-5));
-  }
-  if (right == true){
-    clarkKent.setPointDirection((int)(clarkKent.getPointDirection()+5));
-  }
-  if (up == true){
-    clarkKent.accelerate(.1);
-  }
-  if (down  == true){
-    clarkKent.accelerate(-.1);
-  }
-
+  if (left == true){clarkKent.setPointDirection((int)(clarkKent.getPointDirection()-5));}
+  if (right == true){clarkKent.setPointDirection((int)(clarkKent.getPointDirection()+5));}
+  if (up == true){clarkKent.accelerate(.1);}
+  if (down  == true){clarkKent.accelerate(-.1);}
 }
+
 void keyPressed(){
-  if(key == CODED && keyCode == UP){ 
-    up = true;
-  }
-  else if(key == CODED && keyCode == DOWN){ 
-    down = true;
-  }
-  else if(key == CODED && keyCode == LEFT){ 
-    left = true;
-  }
-  else if(key == CODED && keyCode == RIGHT){ 
-    right = true;
-  }
-  if(key == 'h'){ 
+  if(key == CODED && keyCode == UP){up = true;}  
+  if(key == CODED && keyCode == DOWN){down = true;}
+  if(key == CODED && keyCode == LEFT){left = true;}
+  if(key == CODED && keyCode == RIGHT){right = true;}
+  if (key == ' '){heatVision.add(new Bullets(clarkKent));}
+  if(key == 'h'){
     //full stop 
     clarkKent.setDirectionX(0);
     clarkKent.setDirectionY(0);
@@ -105,7 +117,7 @@ class SpaceShip extends Floater{
     xCorners[3] = -6;
     yCorners[3] = 0;
 
-    myColor = color(124,174,138);   
+    myColor = color(126,166,0);   
     setX((int)(bSize/2));
     setY((int)(bSize/2));
     setDirectionX(0);
@@ -172,7 +184,7 @@ class Asteroids extends Floater {
   private int rotationSpeed;
   Asteroids(){
 
-      myColor = color(200,7,32,70);
+      myColor = color(255,8,0,80);
       corners = 8;
       xCorners = new int[corners];
       yCorners = new int[corners];
@@ -245,7 +257,7 @@ class Bullets extends Floater {
     setPointDirection((int)(clarkKent.getPointDirection()));
     double dRadians = myPointDirection*(Math.PI/180);
     setDirectionX(5 * Math.cos(dRadians) + clarkKent.getDirectionX()); 
-    setDirectionY(5 * Math.cos(dRadians) + clarkKent.getDirectionY());   
+    setDirectionY(5 * Math.sin(dRadians) + clarkKent.getDirectionY());   
     accelerate(10);
   }
   public void setX(int x){myCenterX = x;}
@@ -262,10 +274,13 @@ class Bullets extends Floater {
   public void move (){
     myCenterX += myDirectionX;    
     myCenterY += myDirectionY;
-    accelerate(0.5);
+    accelerate(1);
   }
   public void show (){
-    ellipse(x, y, width, height);
+    fill(245,187,0);
+    //triangle(-4,-4,-7,0,-4,4);
+    ellipse((int)myCenterX,(int)myCenterY,10,10);
+   
   }
 }
 abstract class Floater{
@@ -343,4 +358,3 @@ abstract class Floater{
     endShape(CLOSE);  
   }   
 } 
-
