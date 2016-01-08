@@ -24,52 +24,17 @@ public void setup(){
   }
 
   lexLuthor = new ArrayList <Asteroids>();
-  for(int j = 0; j < 30; j++){
+  for(int j = 0; j < 25; j++){
     lexLuthor.add(new Asteroids());
   }
 }
 
 public void draw(){
-  background(0);  
-  for(int i = 0; i < krypton.length; i++){ krypton[i].show();}
-
-  for(int j = 0; j < lexLuthor.size(); j++){
-    lexLuthor.get(j).show();
-    lexLuthor.get(j).move();
    
-    if (dist(lexLuthor.get(j).getX(),lexLuthor.get(j).getY(), clarkKent.getX(), clarkKent.getY()) < 20){
-      clarkKent.setX((int)(bSize/2));
-      clarkKent.setY((int)(bSize/2));
-    }
-  }
+ 
+  startGame();
 
- for(int p = 0; p < heatVision.size(); p++)
-    {
-      for(int c = 0;c < lexLuthor.size() ;c++)
-      {
-        if(dist(heatVision.get(p).getX(),heatVision.get(p).getY(),lexLuthor.get(c).getX(),lexLuthor.get(c).getY()) <= 30)
-        {
-          heatVision.remove(p);
-          lexLuthor.remove(c);
-          break;
-        }
-        if (lexLuthor.size()<10){lexLuthor.add(new Asteroids()); }
-      }
-    }
-
-  for(int h=0; h < heatVision.size(); h++){
-    heatVision.get(h).move();
-    heatVision.get(h).show();
-  }
-
-  clarkKent.show();
-  clarkKent.move();
-
-
-  if (left == true){clarkKent.setPointDirection((int)(clarkKent.getPointDirection()-5));}
-  if (right == true){clarkKent.setPointDirection((int)(clarkKent.getPointDirection()+5));}
-  if (up == true){clarkKent.accelerate(.1);}
-  if (down  == true){clarkKent.accelerate(-.1);}
+  
 }
 
 void keyPressed(){
@@ -103,6 +68,52 @@ void keyReleased(){
     right = false;
   }
 }
+
+void startGame(){
+ background(0); 
+
+ for(int i = 0; i < krypton.length; i++){ krypton[i].show();}
+
+  for(int j = 0; j < lexLuthor.size(); j++){
+    lexLuthor.get(j).show();
+    lexLuthor.get(j).move();
+   
+    if (dist(lexLuthor.get(j).getX(),lexLuthor.get(j).getY(), clarkKent.getX(), clarkKent.getY()) < 20){
+      clarkKent.setX((int)(bSize/2));
+      clarkKent.setY((int)(bSize/2));
+    }
+  }
+
+ for(int p = 0; p < heatVision.size(); p++)
+    {
+      for(int c = 0;c < lexLuthor.size() ;c++)
+      {
+        if(dist(heatVision.get(p).getX(),heatVision.get(p).getY(),lexLuthor.get(c).getX(),lexLuthor.get(c).getY()) <= 30)
+        {
+          heatVision.remove(p);
+          lexLuthor.remove(c);
+          break;
+        }
+        if (lexLuthor.size()<20){lexLuthor.add(new Asteroids()); }
+      }
+    }
+
+  for(int h=0; h < heatVision.size(); h++){
+    heatVision.get(h).move();
+    heatVision.get(h).show();
+  }
+
+  clarkKent.show();
+  clarkKent.move();
+
+  if (left == true){clarkKent.setPointDirection((int)(clarkKent.getPointDirection()-5));}
+  if (right == true){clarkKent.setPointDirection((int)(clarkKent.getPointDirection()+5));}
+  if (up == true){clarkKent.accelerate(.1);}
+  if (down  == true){clarkKent.accelerate(-.1);}
+
+}
+
+
 class SpaceShip extends Floater{
   public SpaceShip(){
     corners = 4;
@@ -283,6 +294,8 @@ class Bullets extends Floater {
    
   }
 }
+
+
 abstract class Floater{
   protected int corners;  //the number of corners, a triangular floater has 3   
   protected int[] xCorners;   
