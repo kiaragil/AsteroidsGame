@@ -32,7 +32,7 @@ public void setup(){
 public void draw(){
    
  
-  startGame();
+  startPage();
 
   
 }
@@ -110,6 +110,19 @@ void startGame(){
   if (right == true){clarkKent.setPointDirection((int)(clarkKent.getPointDirection()+5));}
   if (up == true){clarkKent.accelerate(.1);}
   if (down  == true){clarkKent.accelerate(-.1);}
+
+}
+
+void startPage(){
+
+  background(0);
+  textSize(50);
+  textAlign(CENTER);
+fill(164, 255,130);
+text("START GAME", 300, 300); 
+textSize(20);
+fill(74, 207,128);
+text("PRESS 'ENTER' KEY", 300, 330); 
 
 }
 
