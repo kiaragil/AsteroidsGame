@@ -1,4 +1,7 @@
 public int bSize = 600;
+public int score = 0;
+public int lives = 4;
+
 
 boolean left = false;
 boolean right = false;
@@ -6,6 +9,10 @@ boolean up = false;
 boolean down = false;
 boolean hyperSpace = false;
 boolean fire = false;
+boolean openingPage = true;
+boolean gameOver = false;
+boolean livesAboveOne = true;
+
 
 SpaceShip clarkKent;
 Stars [] krypton;
@@ -30,14 +37,20 @@ public void setup(){
 }
 
 public void draw(){
-   
- 
   startPage();
 
+  if (openingPage == false){
+    startGame();
+  }
+
+  if (gameOver == true;)
+    gameOver();
+    
   
 }
 
 void keyPressed(){
+  if (openingPage == true && key == ' '){openingPage = false;}
   if(key == CODED && keyCode == UP){up = true;}  
   if(key == CODED && keyCode == DOWN){down = true;}
   if(key == CODED && keyCode == LEFT){left = true;}
@@ -71,7 +84,15 @@ void keyReleased(){
 
 void startGame(){
  background(0); 
-
+ fill(164, 255,130);
+ textSize(15);
+ text("SCORE:" +" "+ score, 50,570);
+ if(livesAboveOne == true){ text("LIVES:" +" "+ lives, 45,550); }
+ else if(livesAboveOne == false){
+  fill(253, 16,51);
+  text("LIVES:" +" "+ lives, 45,550);
+}
+ 
  for(int i = 0; i < krypton.length; i++){ krypton[i].show();}
 
   for(int j = 0; j < lexLuthor.size(); j++){
@@ -79,19 +100,21 @@ void startGame(){
     lexLuthor.get(j).move();
    
     if (dist(lexLuthor.get(j).getX(),lexLuthor.get(j).getY(), clarkKent.getX(), clarkKent.getY()) < 20){
+      lives--;
       clarkKent.setX((int)(bSize/2));
       clarkKent.setY((int)(bSize/2));
+      if (lives < 2){ livesAboveOne = false; }
+      if (lives == 0){ gameOver = true; }
+
     }
   }
 
- for(int p = 0; p < heatVision.size(); p++)
-    {
-      for(int c = 0;c < lexLuthor.size() ;c++)
-      {
-        if(dist(heatVision.get(p).getX(),heatVision.get(p).getY(),lexLuthor.get(c).getX(),lexLuthor.get(c).getY()) <= 30)
-        {
+ for(int p = 0; p < heatVision.size(); p++){
+      for(int c = 0;c < lexLuthor.size() ;c++){
+        if(dist(heatVision.get(p).getX(),heatVision.get(p).getY(),lexLuthor.get(c).getX(),lexLuthor.get(c).getY()) <= 30){
           heatVision.remove(p);
           lexLuthor.remove(c);
+          score++;
           break;
         }
         if (lexLuthor.size()<20){lexLuthor.add(new Asteroids()); }
@@ -118,14 +141,14 @@ void startPage(){
   background(0);
   textSize(50);
   textAlign(CENTER);
-fill(164, 255,130);
-text("START GAME", 300, 300); 
-textSize(20);
-fill(74, 207,128);
-text("PRESS 'ENTER' KEY", 300, 330); 
-
+  fill(164, 255,130);
+  text("START GAME", 300, 300); 
+  textSize(20);
+  fill(74, 207,128);
+  text("PRESS 'SPACE' KEY", 300, 330); 
 }
 
+void gameOver(){}
 
 class SpaceShip extends Floater{
   public SpaceShip(){
