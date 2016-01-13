@@ -108,7 +108,10 @@ void startGame(){
       clarkKent.setX((int)(bSize/2));
       clarkKent.setY((int)(bSize/2));
       if (lives < 2){ livesAboveOne = false; }
-      if (lives == 0){ gameOver = true; }
+      if (lives == 0){ 
+        gameOver = true; 
+        break;
+      }
 
     }
   }
@@ -146,15 +149,19 @@ void startGame(){
 }
 
 void startScreen(){
-
   background(0);
   textSize(50);
   textAlign(CENTER);
   fill(164, 255,130);
-  text("START GAME", 300, 300); 
+  text("HOW TO PLAY", 300, 200);
+  textSize(30);
+  text("START GAME", 300, 330); 
   textSize(20);
   fill(74, 207,128);
-  text("PRESS 'SPACE' KEY", 300, 330); 
+  text("ARROW KEYS TO MOVE", 300, 230); 
+  text("'SPACE' TO SHOOT", 300, 250);
+  text("'H' TO HYPER SPACE", 300, 270);
+  text("PRESS 'SPACE' KEY", 300, 360); 
 }
 
 void gameOver(){
