@@ -44,14 +44,14 @@ public void draw(){
   }
 
   if (gameOver == true){
-    gameOver();
+    gameOverScreen();
   }
   
 }
 
 void keyPressed(){
   if (opening == true && key == ' '){opening = false;}
-  if (gameOver == true && key == ' '){
+  if (gameOverScreen == true && key == ' '){
     reset();
     
   }
@@ -164,7 +164,7 @@ void startScreen(){
   text("PRESS 'SPACE' KEY", 300, 360); 
 }
 
-void gameOver(){
+void gameOverScreen(){
   background(0);
   textSize(50);
   textAlign(CENTER);
