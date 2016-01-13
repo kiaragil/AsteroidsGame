@@ -1,6 +1,6 @@
 public int bSize = 600;
 public int score = 0;
-public int lives = 4;
+public int lives = 3;
 
 
 boolean left = false;
@@ -9,7 +9,7 @@ boolean up = false;
 boolean down = false;
 boolean hyperSpace = false;
 boolean fire = false;
-boolean openingPage = true;
+boolean opening = true;
 boolean gameOver = false;
 boolean livesAboveOne = true;
 
@@ -31,15 +31,15 @@ public void setup(){
   }
 
   lexLuthor = new ArrayList <Asteroids>();
-  for(int j = 0; j < 25; j++){
+  for(int j = 0; j < 30; j++){
     lexLuthor.add(new Asteroids());
   }
 }
 
 public void draw(){
-  startPage();
+  startScreen();
 
-  if (openingPage == false){
+  if (opening == false){
     startGame();
   }
 
@@ -50,7 +50,11 @@ public void draw(){
 }
 
 void keyPressed(){
-  if (openingPage == true && key == ' '){openingPage = false;}
+  if (opening == true && key == ' '){opening = false;}
+  if (gameOver == true && key == ' '){
+    reset();
+    
+  }
   if(key == CODED && keyCode == UP){up = true;}  
   if(key == CODED && keyCode == DOWN){down = true;}
   if(key == CODED && keyCode == LEFT){left = true;}
@@ -115,9 +119,14 @@ void startGame(){
           heatVision.remove(p);
           lexLuthor.remove(c);
           score++;
+          
+         if(score % 100 == 0){
+           lives++;          
+         }
+         
           break;
         }
-        if (lexLuthor.size()<20){lexLuthor.add(new Asteroids()); }
+        if (lexLuthor.size()<26){lexLuthor.add(new Asteroids()); }
       }
     }
 
@@ -136,7 +145,7 @@ void startGame(){
 
 }
 
-void startPage(){
+void startScreen(){
 
   background(0);
   textSize(50);
@@ -148,8 +157,27 @@ void startPage(){
   text("PRESS 'SPACE' KEY", 300, 330); 
 }
 
-void gameOver(){}
+void gameOver(){
+  background(0);
+  textSize(50);
+  textAlign(CENTER);
+  fill(253, 16,51);
+  text("GAME OVER :(", 300, 300); 
+  textSize(20);
+  fill(74, 207,128);
+  text("YOUR SCORE:"+" "+score, 300, 330); 
+  text("PRESS 'SPACE' KEY TO PLAY AGAIN", 300, 360); 
+}
 
+void reset(){
+  clarkKent.setX((int)(bSize/2));
+  clarkKent.setY((int)(bSize/2));
+  gameOver = false;
+  livesAboveOne = true;
+  score = 0;
+  lives = 4;
+  
+}
 class SpaceShip extends Floater{
   public SpaceShip(){
     corners = 4;
