@@ -51,7 +51,7 @@ public void draw(){
 
 void keyPressed(){
   if (opening == true && key == ' '){opening = false;}
-  if (gameOverScreen == true && key == ' '){
+  if (gameOver == true && key == ' '){
     reset();
     
   }
