@@ -123,7 +123,7 @@ void startGame(){
           lexLuthor.remove(c);
           score++;
           
-         if(score % 100 == 0){
+         if(score > 0 && score % 100 == 0){
            lives++;          
          }
          
@@ -182,7 +182,7 @@ void reset(){
   gameOver = false;
   livesAboveOne = true;
   score = 0;
-  lives = 4;
+  lives = 3;
   
 }
 class SpaceShip extends Floater{
