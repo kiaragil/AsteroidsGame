@@ -124,7 +124,10 @@ void startGame(){
           score++;
           
          if(score > 0 && score % 100 == 0){
-           lives++;          
+           lives++; 
+           if (lives > 1){
+            livesAboveOne = true;
+           }         
          }
          
           break;
