@@ -43,9 +43,9 @@ public void draw(){
     startGame();
   }
 
-  if (gameOver == true;)
+  if (gameOver == true){
     gameOver();
-    
+  }
   
 }
 
