@@ -50,7 +50,10 @@ public void draw(){
 }
 
 void keyPressed(){
-  if (opening == true && key == ' '){opening = false;}
+  if (opening == true && key == ' '){
+    reset();
+    opening = false;
+  }
   if (gameOver == true && key == ' '){
     reset();
     
